@@ -1,0 +1,104 @@
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+p {
+  color:  #808080;
+  font-family: 'Open Sans', sans-serif;
+}
+
+table {
+  margin-bottom: 30px;
+}
+
+.bolded {
+  font-weight: 500;
+}
+
+.dataTables_info, .pagination {
+  margin-bottom: 3%;
+}
+
+.color-section {
+  background-color: #f1f3f5;
+}
+
+.title, .stats-sum {
+  text-align: center;
+}
+
+#jumbo-btn {
+  margin: 2% 2% 0;
+}
+
+.source:hover {
+  text-decoration: none;
+}
+
+/* footer styling */
+.footer-icons {
+  color: gray;
+}
+
+.footer-icons:hover {
+  color: #333;
+}
+
+.copyright {
+  font-size: .9rem;
+  margin-bottom: 0;
+}
+
+#footer {
+  height: 180px;
+}
+
+#footer .container-fluid {
+  padding: 20px 0 20px;
+}
+
+#footer .container-fluid .row {
+  padding: 10px 0 0;
+}
+
+#contact-btn {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -180px;
+  /* Pad bottom by footer height */
+  padding: 0 0 180px;
+}
+
+/* scroll to top button */
+#back2Top {
+    width: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+    -moz-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+    background-color: gray;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+}
+#back2Top:hover {
+    background-color: gray;
+    color: #333;
+}

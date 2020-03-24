@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Coronavirus Tracker | Confirmed Cases</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width-device-width, initial-scale=1">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- datatables bootstrap -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+
+  <script src="https://kit.fontawesome.com/8e310d4b6b.js" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- jquery data tables -->
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,500&display=swap" rel="stylesheet">
+  <!-- custom css -->
+  <link rel="stylesheet" th:href="@{css/styles.css}">
+  <!-- custom js -->
+  <script type="text/javascript" th:src="@{script/scroll-script.js}"></script>
+  <script type="text/javascript" th:src="@{script/table-script.js}"></script>
+</head>
+
+<body>
+  <main id="wrap" class="container">
+
+    <section class="title">
+      <h1 class="bolded">Coronovirus Tracker</h1>
+      <p>
+        This is a minimalistic view of the numbers associacted with the Coronovirus (Covid-19) outbreak
+        that is happening across the world. The information comes from a table of data provided by
+        <a href="https://systems.jhu.edu/" target="_blank">Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE)</a>
+        that is pulled from many different data sources. There is a link to the source above the table.
+      </p>
+      <br>
+      <p>
+        These numbers are alarming and changing rapidly. If you would like to help in a simple way then check
+        out <a href="https://foldingathome.org/covid19/" target="_blank">this website</a> for more information.
+      </p>
+      <br>
+    </section>
+
+    <section class="stats-sum">
+      <div class="jumbotron">
+        <h1 class="display-4 bolded" th:text="${#numbers.formatDecimal(totalReportedCases, 0, 'COMMA', 0, 'POINT')}"></h1>
+        <p class="lead">Total Coronovirus cases reported as of today.</p>
+        <hr class="my-4">
+        <h2 class="bolded" th:text="${#numbers.formatDecimal(totalNewCases, 0, 'COMMA', 0, 'POINT')}"></h2>
+        <p>New cases reported since previous day</p>
+        <a type="button" id="jumbo-btn" class="btn btn-outline-danger" th:href="@{deaths}">
+          Deaths
+        </a>
+        <a type="button" id="jumbo-btn" class="btn btn-outline-success" th:href="@{recovered}">
+          Recovered
+        </a>
+      </div>
+    </section>
+
+    <section class="stats-table">
+      <p>*<a class="source" href="https://github.com/CSSEGISandData/COVID-19" target="_blank">
+          Click here</a>
+        to be taken to the source of information.
+      </p>
+      <div class="table-responsive">
+        <table id="stats-table" class="table table-hover table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">
+                <a id="state" class="hover">State</a>
+              </th>
+              <th scope="col">
+                <a id="country" class="hover">Country</a>
+              </th>
+              <th scope="col">
+                <a id="cases" class="hover">Cases</a>
+              </th>
+              <th scope="col">
+                <a id="change" class="hover">1-Day Change</a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row" th:each="locationStat : ${locationStats}">
+              <td th:text="${locationStat.state}"></td>
+              <td th:text="${locationStat.country}"></td>
+              <td th:text="${locationStat.latestTotalCases}">0</td>
+              <td th:text="${locationStat.diffFromPrevDay}">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="color-section">
+    <footer id="footer">
+      <div class="container-fluid">
+        <div class="col">
+          <div class="row justify-content-center">
+            <a id="contact-btn" class="btn btn-primary" href="mailto:bhaden94@yahoo.com" role="button">Contact</a>
+          </div>
+        </div>
+
+        <div class="row m-0 justify-content-center">
+          <div class="col-auto">
+            <a class="footer-icons text-decoration-none" href="https://www.linkedin.com/in/brady-s-haden" target="_blank">
+              <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+          </div>
+          <div class="col-auto">
+            <a class="footer-icons text-decoration-none" href="https://github.com/bhaden94" target="_blank">
+              <i class="fab fa-github-square fa-2x"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row justify-content-center">
+            <p class="copyright">© Brady Haden</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <a id="back2Top" title="Back to top" href="#">&#10148;</a>
+  <!-- bootstrap js -->
+
+
+</body>
+
+</html>
