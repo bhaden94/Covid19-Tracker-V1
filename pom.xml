@@ -12,7 +12,7 @@
 	<artifactId>coronavirus-tracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>coronavirus-tracker</name>
-	<description>Demo project for Spring Boot</description>
+	<description>minimal coronovirus tracker</description>
 
 	<properties>
 		<java.version>12</java.version>
@@ -32,6 +32,11 @@
     		<artifactId>commons-csv</artifactId>
     		<version>1.8</version>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
