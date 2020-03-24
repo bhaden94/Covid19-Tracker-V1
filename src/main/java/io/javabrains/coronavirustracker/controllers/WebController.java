@@ -1,6 +1,5 @@
 package io.javabrains.coronavirustracker.controllers;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class WebController
         .getConfirmedStats();
     // sorts the data
     // see LocationStatsComparator class
-    Collections.sort(confirmedStats, new LocationStatsComparator());
+    // Collections.sort(confirmedStats, new LocationStatsComparator());
 
     int totalReportedCases = confirmedStats.stream()
         .mapToInt(stat -> stat.getLatestTotalCases()).sum();
@@ -63,7 +62,7 @@ public class WebController
     List<LocationStats> deathStats = coronaVirusDataService.getDeathStats();
     // sorts the data
     // see LocationStatsComparator class
-    Collections.sort(deathStats, new LocationStatsComparator());
+    // Collections.sort(deathStats, new LocationStatsComparator());
 
     int totalReportedDeaths = deathStats.stream()
         .mapToInt(stat -> stat.getLatestTotalCases()).sum();
@@ -88,7 +87,7 @@ public class WebController
         .getRecoveredStats();
     // sorts the data
     // see LocationStatsComparator class
-    Collections.sort(recoveredStats, new LocationStatsComparator());
+    // Collections.sort(recoveredStats, new LocationStatsComparator());
 
     int totalReportedRecoveries = recoveredStats.stream()
         .mapToInt(stat -> stat.getLatestTotalCases()).sum();
