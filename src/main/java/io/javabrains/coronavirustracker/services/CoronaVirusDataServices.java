@@ -59,7 +59,7 @@ public class CoronaVirusDataServices
   // * is used for every iteration call (ie: every second if all *'s)
   // must use @EnableScheduling in main class
   // currently it is set to run on the first hour of everyday
-  @Scheduled(cron = "* * 1 * * *")
+  @Scheduled(cron = "0 0 18 * * ?")
   public void fetchConfirmedVirusData() throws IOException, InterruptedException
   {
 
