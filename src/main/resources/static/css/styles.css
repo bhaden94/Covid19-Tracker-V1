@@ -1,6 +1,7 @@
 html, body {
   height: 100%;
   font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.025rem;
 }
 
 p {
@@ -16,12 +17,20 @@ table {
   font-weight: 500;
 }
 
+.big {
+  font-size: 4rem;
+}
+
 .dataTables_info, .pagination {
   margin-bottom: 3%;
 }
 
 .color-section {
   background-color: #f1f3f5;
+}
+
+.title {
+  padding: 5% 0 0;
 }
 
 .title, .stats-sum {
@@ -97,8 +106,30 @@ table {
     text-align: center;
     font-size: 30px;
     text-decoration: none;
+    opacity: 65%;
 }
 #back2Top:hover {
     background-color: gray;
     color: #333;
+}
+
+@media only screen and (max-width: 767px) {
+  p {
+    padding: 0 5%;
+  }
+
+}
+
+@media only screen and (min-width: 1366px) {
+  #back2Top {
+    right: 40px;
+  }
+
+}
+
+@media only screen and (max-width: 370px) {
+  .big {
+    font-size: 3rem;
+  }
+
 }

@@ -22,6 +22,7 @@
   <!-- jquery data tables -->
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <!-- google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,500&display=swap" rel="stylesheet">
   <!-- custom css -->
@@ -35,7 +36,7 @@
   <main id="wrap" class="container">
 
     <section class="title">
-      <h1 class="bolded">Coronovirus Tracker</h1>
+      <h1 class="bolded big">Coronovirus Tracker</h1>
       <p>
         This is a minimalistic view of the numbers associated with the Coronovirus (Covid-19) outbreak
         that is happening across the world. The information comes from a table of data provided by
@@ -52,10 +53,10 @@
 
     <section class="stats-sum">
       <div class="jumbotron">
-        <h1 class="display-4 bolded" th:text="${#numbers.formatDecimal(totalReportedCases, 0, 'COMMA', 0, 'POINT')}"></h1>
+        <h2 class="display-4 bolded" th:text="${#numbers.formatDecimal(totalReportedCases, 0, 'COMMA', 0, 'POINT')}"></h2>
         <p class="lead">Total Coronovirus cases reported as of today.</p>
         <hr class="my-4">
-        <h2 class="bolded" th:text="${#numbers.formatDecimal(totalNewCases, 0, 'COMMA', 0, 'POINT')}"></h2>
+        <h3 class="bolded" th:text="${#numbers.formatDecimal(totalNewCases, 0, 'COMMA', 0, 'POINT')}"></h3>
         <p>New cases reported since previous day</p>
         <a type="button" id="jumbo-btn" class="btn btn-outline-danger" th:href="@{deaths}">
           Deaths

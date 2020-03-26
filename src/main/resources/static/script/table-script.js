@@ -1,3 +1,5 @@
 $(document).ready(function() {
-    $('#stats-table').DataTable();
+    $('#stats-table').DataTable( {
+      "pagingType": "numbers"
+    });
 } );

@@ -31,7 +31,7 @@ public class CoronaVirusDataServices
   // url for data
   private static String VIRUS_DATA_CONFIRMED_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
   private static String VIRUS_DATA_DEATH_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv";
-  private static String VIRUS_DATA_RECOVERED_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv";
+  private static String VIRUS_DATA_RECOVERED_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv";
 
   private List<LocationStats> confirmedStats = new ArrayList<>();
   private List<LocationStats> deathStats = new ArrayList<>();
@@ -59,7 +59,7 @@ public class CoronaVirusDataServices
   // * is used for every iteration call (ie: every second if all *'s)
   // must use @EnableScheduling in main class
   // currently it is set to run on the first hour of everyday
-  @Scheduled(cron = "0 0 18 * * ?")
+  @Scheduled(cron = "0 0 15-18 * * ?")
   public void fetchConfirmedVirusData() throws IOException, InterruptedException
   {
 
@@ -79,7 +79,9 @@ public class CoronaVirusDataServices
     // outputs the body of the http page linked
     // org.apache.commons Maven dependency added to parse values
     // https://commons.apache.org/proper/commons-csv/user-guide.html
+
     StringReader csvBodyReader = new StringReader(httpResponse.body());
+    // Reader csvBodyReader = new FileReader(httpResponse.body());
     // our raw file has the header as the first line so we use header auto
     // detection
     Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader()
@@ -117,7 +119,7 @@ public class CoronaVirusDataServices
   // * is used for every iteration call (ie: every second if all *'s)
   // must use @EnableScheduling in main class
   // currently it is set to run on the first hour of everyday
-  @Scheduled(cron = "* * 1 * * *")
+  @Scheduled(cron = "0 0 15-18 * * ?")
   public void fetchDeathVirusData() throws IOException, InterruptedException
   {
     // creating this new list allows the user to see the old data
@@ -136,7 +138,9 @@ public class CoronaVirusDataServices
     // outputs the body of the http page linked
     // org.apache.commons Maven dependency added to parse values
     // https://commons.apache.org/proper/commons-csv/user-guide.html
+
     StringReader csvBodyReader = new StringReader(httpResponse.body());
+    // Reader csvBodyReader = new FileReader(httpResponse.body());
     // our raw file has the header as the first line so we use header auto
     // detection
     Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader()
@@ -174,7 +178,7 @@ public class CoronaVirusDataServices
   // * is used for every iteration call (ie: every second if all *'s)
   // must use @EnableScheduling in main class
   // currently it is set to run on the first hour of everyday
-  @Scheduled(cron = "* * 1 * * *")
+  @Scheduled(cron = "0 0 15-18 * * ?")
   public void fetchRecoveredVirusData() throws IOException, InterruptedException
   {
     // creating this new list allows the user to see the old data
@@ -193,7 +197,9 @@ public class CoronaVirusDataServices
     // outputs the body of the http page linked
     // org.apache.commons Maven dependency added to parse values
     // https://commons.apache.org/proper/commons-csv/user-guide.html
+
     StringReader csvBodyReader = new StringReader(httpResponse.body());
+    // Reader csvBodyReader = new FileReader(httpResponse.body());
     // our raw file has the header as the first line so we use header auto
     // detection
     Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader()

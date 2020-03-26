@@ -35,7 +35,7 @@
   <main id="wrap" class="container">
 
     <section class="title">
-      <h1 class="bolded">Coronovirus Tracker</h1>
+      <h1 class="bolded big">Coronovirus Tracker</h1>
       <p>
         This is a minimalistic view of the numbers associated with the Coronovirus (Covid-19) outbreak
         that is happening across the world. The information comes from a table of data provided by
@@ -52,10 +52,10 @@
 
     <section class="stats-sum">
       <div class="jumbotron">
-        <h1 class="display-4 bolded" th:text="${#numbers.formatDecimal(totalReportedCases, 0, 'COMMA', 0, 'POINT')}"></h1>
+        <h2 class="display-4 bolded" th:text="${#numbers.formatDecimal(totalReportedCases, 0, 'COMMA', 0, 'POINT')}"></h2>
         <p class="lead">Total Coronovirus recoveries reported as of today.</p>
         <hr class="my-4">
-        <h2 class="bolded" th:text="${#numbers.formatDecimal(totalNewCases, 0, 'COMMA', 0, 'POINT')}"></h2>
+        <h3 class="bolded" th:text="${#numbers.formatDecimal(totalNewCases, 0, 'COMMA', 0, 'POINT')}"></h3>
         <p>New recovereies reported since previous day</p>
         <a type="button" id="jumbo-btn" class="btn btn-outline-primary" th:href="@{home}">
           Home
