@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <title>Coronavirus Tracker | Confirmed Cases</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width-device-width, initial-scale=1">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -23,6 +24,8 @@
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <!-- canvasjs -->
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <!-- google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,500&display=swap" rel="stylesheet">
   <!-- custom css -->
@@ -30,6 +33,102 @@
   <!-- custom js -->
   <script type="text/javascript" th:src="@{script/scroll-script.js}"></script>
   <script type="text/javascript" th:src="@{script/table-script.js}"></script>
+  <script th:inline="javascript">
+  /*<![CDATA[*/
+    window.onload = function() {
+      var cases = [];
+      var deaths = [];
+      var recovered = [];
+      var graphStats = /*[[${graphStats}]]*/ 'default';
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: false,
+        zoomEnabled: true,
+        theme: "light2",
+        title:{
+          text: "World's Curve"
+        },
+        axisX:{
+          valueFormatString: "DD-MMM",
+        },
+        axisY2:{
+          valueFormatString: ""
+        },
+        toolTip: {
+          shared: true,
+          borderColor: "#808080",
+          cornerRadius: 4
+        },
+        legend:{
+          cursor: "pointer",
+          verticalAlign: "top",
+          horizontalAlign: "center",
+          dockInsidePlotArea: true,
+          itemclick: toggleDataSeries
+        },
+        data: [{
+          type:"line",
+          color: "#0275d8",
+          lineColor: "#0275d8",
+          axisYType: "secondary",
+          name: "Confirmed Cases",
+          showInLegend: true,
+          markerSize: 0,
+          dataPoints: cases
+        },
+        {
+          type:"line",
+          color: "#5cb85c",
+          lineColor: "#5cb85c",
+          axisYType: "secondary",
+          name: "Recovered",
+          showInLegend: true,
+          markerSize: 0,
+          dataPoints: recovered
+        },
+        {
+          type: "line",
+          color: "#d9534f",
+          lineColor: "#d9534f",
+          axisYType: "secondary",
+          name: "Deaths",
+          showInLegend: true,
+          markerSize: 0,
+          dataPoints: deaths
+        }]
+      });
+
+      graphStats.forEach(myFunction);
+      function myFunction(value, index) {
+        var date = new Date(value.date);
+        cases[index] = {
+          x : date,
+          y : value.casesThisDay
+        }
+        recovered[index] = {
+          x : date,
+          y : value.recoveredThisDay
+        }
+        deaths[index] = {
+          x : date,
+          y : value.deathsThisDay
+        };
+      }
+      chart.render();
+
+      function toggleDataSeries(e){
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+          e.dataSeries.visible = false;
+        } else{
+          e.dataSeries.visible = true;
+        }
+        chart.render();
+      }
+    }
+
+  /*]]>*/
+
+</script>
 </head>
 
 <body>
@@ -100,6 +199,10 @@
           </tbody>
         </table>
       </div>
+    </section>
+
+    <section class="chart">
+      <div id="chartContainer"></div>
     </section>
   </main>
 

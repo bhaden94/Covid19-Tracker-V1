@@ -25,6 +25,13 @@ table {
   margin-bottom: 3%;
 }
 
+#chartContainer {
+  text-align: center;
+  height: 360px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 .color-section {
   background-color: #f1f3f5;
 }

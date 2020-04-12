@@ -8,7 +8,6 @@ package io.javabrains.coronavirustracker.models;
 
 public class LocationStats
 {
-
   private String state;
   private String country;
   private int latestTotalCases;
@@ -58,7 +57,8 @@ public class LocationStats
   public String toString()
   {
     return "LocationStats [state=" + state + ", country=" + country
-        + ", latestTotalCases=" + latestTotalCases + "]";
+        + ", latestTotalCases=" + latestTotalCases + ", diffFromPrevDay="
+        + diffFromPrevDay + "]";
   }
 
 }

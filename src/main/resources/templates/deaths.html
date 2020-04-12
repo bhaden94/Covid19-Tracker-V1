@@ -53,10 +53,10 @@
 
     <section class="stats-sum">
       <div class="jumbotron">
-        <h2 class="display-4 bolded" th:text="${#numbers.formatDecimal(totalReportedCases, 0, 'COMMA', 0, 'POINT')}"></h2>
+        <h2 class="display-4 bolded" th:text="${#numbers.formatDecimal(totalReportedDeaths, 0, 'COMMA', 0, 'POINT')}"></h2>
         <p class="lead">Total Coronovirus deaths reported as of today.</p>
         <hr class="my-4">
-        <h3 class="bolded" th:text="${#numbers.formatDecimal(totalNewCases, 0, 'COMMA', 0, 'POINT')}"></h3>
+        <h3 class="bolded" th:text="${#numbers.formatDecimal(totalNewDeaths, 0, 'COMMA', 0, 'POINT')}"></h3>
         <p>New deaths reported since previous day</p>
         <a type="button" id="jumbo-btn" class="btn btn-outline-primary" th:href="@{home}">
           Home
@@ -91,11 +91,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr scope="row" th:each="locationStat : ${locationStats}">
-              <td th:text="${locationStat.state}"></td>
-              <td th:text="${locationStat.country}"></td>
-              <td th:text="${locationStat.latestTotalCases}">0</td>
-              <td th:text="${locationStat.diffFromPrevDay}">0</td>
+            <tr scope="row" th:each="deathStat : ${deathStats}">
+              <td th:text="${deathStat.state}"></td>
+              <td th:text="${deathStat.country}"></td>
+              <td th:text="${deathStat.latestTotalCases}">0</td>
+              <td th:text="${deathStat.diffFromPrevDay}">0</td>
             </tr>
           </tbody>
         </table>

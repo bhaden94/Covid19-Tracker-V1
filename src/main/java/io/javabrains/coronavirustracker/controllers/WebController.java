@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.javabrains.coronavirustracker.models.GraphStats;
 import io.javabrains.coronavirustracker.models.LocationStats;
 import io.javabrains.coronavirustracker.services.CoronaVirusDataServices;
 
@@ -36,6 +37,8 @@ public class WebController
 
     List<LocationStats> confirmedStats = coronaVirusDataService
         .getConfirmedStats();
+    List<GraphStats> graphStats = coronaVirusDataService
+        .getTotalCasesPerDayStats();
     // sorts the data
     // see LocationStatsComparator class
     // Collections.sort(confirmedStats, new LocationStatsComparator());
@@ -45,10 +48,13 @@ public class WebController
     int totalNewCases = confirmedStats.stream()
         .mapToInt(stat -> stat.getDiffFromPrevDay()).sum();
 
+    // for our table of data
     model.addAttribute("locationStats", confirmedStats);
     model.addAttribute("totalReportedCases", totalReportedCases);
     model.addAttribute("totalNewCases", totalNewCases);
 
+    // for our spline graph of data
+    model.addAttribute("graphStats", graphStats);
     return "home";
   }
 
@@ -69,15 +75,15 @@ public class WebController
     int totalNewDeaths = deathStats.stream()
         .mapToInt(stat -> stat.getDiffFromPrevDay()).sum();
 
-    model.addAttribute("locationStats", deathStats);
-    model.addAttribute("totalReportedCases", totalReportedDeaths);
-    model.addAttribute("totalNewCases", totalNewDeaths);
+    model.addAttribute("deathStats", deathStats);
+    model.addAttribute("totalReportedDeaths", totalReportedDeaths);
+    model.addAttribute("totalNewDeaths", totalNewDeaths);
 
     return "deaths";
   }
 
   /*
-   * death shows the confirmed deaths and 1-day change
+   * recovered shows the confirmed recoveries and 1-day change
    */
   @RequestMapping("/recovered")
   public String recovered(Model model)
@@ -94,9 +100,9 @@ public class WebController
     int totalNewRecoveries = recoveredStats.stream()
         .mapToInt(stat -> stat.getDiffFromPrevDay()).sum();
 
-    model.addAttribute("locationStats", recoveredStats);
-    model.addAttribute("totalReportedCases", totalReportedRecoveries);
-    model.addAttribute("totalNewCases", totalNewRecoveries);
+    model.addAttribute("recoveredStats", recoveredStats);
+    model.addAttribute("totalReportedRecoveries", totalReportedRecoveries);
+    model.addAttribute("totalNewRecoveries", totalNewRecoveries);
 
     return "recovered";
   }
