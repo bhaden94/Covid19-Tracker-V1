@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('#stats-table').DataTable( {
-      "pagingType": "numbers"
+      "pagingType": "numbers",
+      "autoWidth": false
     });
 } );
