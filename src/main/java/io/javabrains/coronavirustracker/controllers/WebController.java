@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.javabrains.coronavirustracker.models.GraphStats;
@@ -18,12 +19,18 @@ import io.javabrains.coronavirustracker.services.CoronaVirusDataServices;
  */
 
 // not a rest controller because we want HTML UI output
-@Controller
+@Controller()
 public class WebController
 {
   // use this to get access to CoronaVirusDataServices
   @Autowired
   CoronaVirusDataServices coronaVirusDataService;
+
+  @GetMapping("/")
+  public String redirectToHome(Model model)
+  {
+    return "redirect:/home";
+  }
 
   // whatever the return value is should be the HTML file that we are going to
   // update into
